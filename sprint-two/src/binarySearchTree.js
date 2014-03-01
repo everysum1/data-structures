@@ -1,6 +1,6 @@
 var makeBinarySearchTree = function(value){
 
-  var newTree = Object.create(treeMethods);
+  var newTree = Object.create(binaryTreeMethods);
   newTree.value = value;
   newTree.left = undefined;
   newTree.right = undefined;
@@ -8,9 +8,9 @@ var makeBinarySearchTree = function(value){
 };
 
 
-var treeMethods = {};
+var binaryTreeMethods = {};
 
-treeMethods.insert = function(value){
+binaryTreeMethods.insert = function(value){
   var child = makeBinarySearchTree(value);
   if (child.value < this.value){
     if(this.left === undefined){
@@ -30,7 +30,7 @@ treeMethods.insert = function(value){
   }
 };
 
-treeMethods.contains = function(target){
+binaryTreeMethods.contains = function(target){
   if(this.value === target) {
     return true;
   }
@@ -43,7 +43,7 @@ treeMethods.contains = function(target){
   return false;
 };
 
-treeMethods.depthFirstLog = function(callback) {
+binaryTreeMethods.depthFirstLog = function(callback) {
   if(this.left !== undefined) {
      this.left.depthFirstLog(callback);
   }
