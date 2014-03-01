@@ -8,23 +8,31 @@ var setPrototype = {};
 
 setPrototype.add = function(item){
   if(this._storage === undefined){
-    this._storage = {};
+    this._storage = [];
   }
-  this._storage[item] = item;
+  if(!this.contains(item)) {
+    this._storage.push(item);
+  }
 };
 
 setPrototype.contains = function(item){
   if(this._storage === undefined){
     return false;
   }
-  return this._storage[item] !== undefined;
+  for(var i = 0; i < this._storage.length; i++) {
+    if(this._storage[i] === item) {
+      return true;
+    }
+  }
+  return false;
 };
 
 setPrototype.remove = function(item){
-  if(this.contains(item)){
-    delete this._storage[item];
+  var index = this._storage.indexOf(item);
+  if(index >= 0){
+    this._storage.splice(index,1);
   }
-  if(Object.keys(this._storage).length === 0){
+  if(this._storage.length === 0){
     this._storage = undefined;
   }
 };

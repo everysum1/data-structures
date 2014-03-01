@@ -52,3 +52,26 @@ binaryTreeMethods.depthFirstLog = function(callback) {
   }
    callback(this);
 };
+
+binaryTreeMethods.breadthFirstLog = function(callback) {
+  debugger;
+  var currentLevel = [this];
+  var children = [];
+  var traverse = function() {
+    for(var i = 0; i < currentLevel.length; ++i) {
+      callback(currentLevel[i]);
+      if(currentLevel[i].left !== undefined) {
+        children.push(currentLevel[i].left);
+      }
+      if(currentLevel[i].right !== undefined) {
+        children.push(currentLevel[i].right);
+      }
+    }
+    currentLevel = children;
+    children = [];
+    if(currentLevel.length !== 0) {
+      traverse();
+    }
+  };
+  traverse();
+};

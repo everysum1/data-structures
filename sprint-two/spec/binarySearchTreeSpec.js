@@ -38,4 +38,17 @@ describe("binarySearchTree", function() {
     binarySearchTree.depthFirstLog(func);
     assert.notStrictEqual(array, [5,2,3]);
   });
+
+    it("should apply a callback to all nodes on a tree using 'breadthFirstLog", function(){
+    binarySearchTree.insert(5);
+    binarySearchTree.insert(11);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(8);
+    binarySearchTree.breadthFirstLog(function(binarySearchTreeNode) {
+      binarySearchTreeNode.value++;
+    });
+    assert.isTrue(binarySearchTree.contains(12));
+    assert.isTrue(binarySearchTree.contains(9));
+  });
 });

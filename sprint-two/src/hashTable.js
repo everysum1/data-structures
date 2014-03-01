@@ -48,7 +48,6 @@ HashTable.prototype.remove = function(key){
   });
   if(keychain.length < this._limit*0.25){
     this._limit = this._limit / 2;
-    console.log(this._limit);
     this._storage = makeLimitedArray(this._limit);
     this._valueCount = 0;
     for(var i = 0; i < keychain.length; i++) {
