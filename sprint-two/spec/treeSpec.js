@@ -67,4 +67,17 @@ describe("tree", function() {
     assert.isTrue(tree.contains(8));
   });
 
+  it("should apply a callback to all nodes on a tree", function(){
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(11);
+    tree.children[1].addChild(8);
+    tree.traverse(function(treeNode) {
+      treeNode.value++;
+    });
+    assert.isTrue(tree.contains(12));
+    assert.isTrue(tree.contains(9));
+  });
+
+
 });

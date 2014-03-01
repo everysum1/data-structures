@@ -47,3 +47,11 @@ treeMethods.contains = function(target){
   return false;
 };
 
+treeMethods.traverse = function(callback) {
+  callback(this);
+  if(this.children !== undefined){
+    for(var i = 0; i < this.children.length; ++i) {
+      this.children[i].traverse(callback);
+    }
+  }
+};
