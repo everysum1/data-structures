@@ -54,7 +54,6 @@ binaryTreeMethods.depthFirstLog = function(callback) {
 };
 
 binaryTreeMethods.breadthFirstLog = function(callback) {
-  debugger;
   var currentLevel = [this];
   var children = [];
   var traverse = function() {
@@ -74,4 +73,61 @@ binaryTreeMethods.breadthFirstLog = function(callback) {
     }
   };
   traverse();
+};
+
+binaryTreeMethods.rebalance = function() {
+  var levels = [];
+  var min = 0;
+  var max = 0;
+  var getLeaves = function() {
+    var currentLevel = [this];
+    var leaves = [];
+    var children = [];
+    var traverse = function() {
+      for(var i = 0; i < currentLevel.length; ++i) {
+        if(currentLevel[i].left !== undefined) {
+          children.push(currentLevel[i].left);
+        }
+        if(currentLevel[i].right !== undefined) {
+          children.push(currentLevel[i].right);
+        }
+        if(currentLevel[i].left === undefined && currentLevel[i].right === undefined) {
+          leaves.push(currentLevel[i]);
+        }
+      }
+      levels.push(leaves);
+      currentLevel = children;
+      children = [];
+      if(currentLevel.length !== 0) {
+        traverse();
+      }
+    };
+    traverse();
+  };
+  getLeaves();
+  for(var i = 0; i < levels.length; ++i) {
+    if(levels[i].length > 0 && i < min) {
+      min = i;
+    }
+    if(levels[i].length > 0 && i > max) {
+      max = i;
+    }
+  }
+
+  if(max/2 > min){
+    var treeValues = [];
+    this.depthFirstLog(function(item){
+      treeValues.push(item.value);
+    });
+
+    treeValues.sort();
+    var balancedTree = makeBinarySearchTree( Math.floor((treeValues.length/2)) );
+
+    while(treeValues.length>0){
+      balancedTree.insert( Math.floor((treeValues.length/2)) );
+    }
+
+    this = balancedTree;
+  }
+
 };
