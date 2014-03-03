@@ -1,7 +1,16 @@
 var Graph = function(){
+  this.nodes ={};
 };
 
 Graph.prototype.addNode = function(newNode, toNode){
+  if(Object.keys(this).length === 1){
+    var firstNode = Object.keys(this)[0];
+    this.nodes[newNode] = [firstNode];
+    this.nodes[firstNode].push(newNode);
+  }
+  else{
+    this.nodes[newNode] = toNode === undefined ? [] : [toNode];
+  }
 };
 
 Graph.prototype.contains = function(node){

@@ -19,6 +19,29 @@ describe("tree", function() {
     expect(tree.children[0].value).to.equal(5);
   });
 
+  it("should have a child that recognizes its parent", function(){
+    tree.addChild(5);
+    tree.children[0].addChild(3);
+    expect(tree.children[0].children[0].parent.value).to.equal(5);
+  });
+
+  it("should dissacoiate a parent child relationship when removeFromParent is called", function(){
+    var child;
+    tree.addChild(5);
+    tree.addChild(4);
+    child = tree.children[0];
+    expect(tree.children[0].value).to.equal(5);
+
+    tree.children[0].removeFromParent();
+    expect(tree.children.length).to.equal(1);
+    expect(tree.children[0].value).to.equal(4);
+    expect(child.parent).to.equal(undefined);
+
+    tree.children[0].removeFromParent();
+    expect(tree.children).to.equal(undefined);
+
+  });
+
   it("should return true for a value that the tree contains", function(){
     tree.addChild(5);
     assert.isTrue(tree.contains(5));
@@ -43,5 +66,18 @@ describe("tree", function() {
     assert.isTrue(tree.contains(7));
     assert.isTrue(tree.contains(8));
   });
+
+  it("should apply a callback to all nodes on a tree", function(){
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(11);
+    tree.children[1].addChild(8);
+    tree.traverse(function(treeNode) {
+      treeNode.value++;
+    });
+    assert.isTrue(tree.contains(12));
+    assert.isTrue(tree.contains(9));
+  });
+
 
 });
