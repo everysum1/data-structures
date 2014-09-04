@@ -1,16 +1,16 @@
-var makeStack = function() {
+var makeStackOld = function() {
   // Hey! Copy your code from src/functional/stack.js and paste it here
   var instance = {};
 
   instance.length = 0;
   instance.storage = {};
 
-  _.extend(instance, stackMethods);
+  _.extend(instance, stackMethodsOld);
 
   return instance;
 };
   
-var stackMethods = {
+var stackMethodsOld = {
   push : function(value){
     this.storage[this.length] = value;
     this.length++;
@@ -29,6 +29,36 @@ var stackMethods = {
     return this.length;
   }
 
+};
 
+var makeStack = function(){
+  var stack = {};
+  stack.storage = [];
+  _extend(stack, stackMethods);
+  return stack;
+};
+
+var stackMethods = {
+  'push': function(val){
+    return this.storage.push(val);
+  },
+  'pop': function(){
+    return this.storage.pop();
+  },
+  'size': function(){
+    return this.storage.length;
+  }
 
 };
+
+_extend = function(obj1, obj2){
+  for(var key in obj2){
+    obj1[key] = obj2[key];
+  }
+};
+
+var stack = makeStack();
+console.log(stack.push('cool'));
+stack.push('rad');
+console.log(stack.size());
+console.log(stack.pop());

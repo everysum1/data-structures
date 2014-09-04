@@ -1,15 +1,15 @@
-var Queue = function() {
+var QueueOld = function() {
   // Hey! Copy your code from src/prototypal/queue.js and paste it here
   this.storage = {};
   this.length = 0;
 
 };
 
-Queue.prototype.enqueue = function(value){
+QueueOld.prototype.enqueue = function(value){
   this.storage[this.length++] = value;
 };
 
-Queue.prototype.dequeue = function(){
+QueueOld.prototype.dequeue = function(){
   if(this.length > 0) {
     var item = this.storage[0];
     for(var num = 1; num < this.length; num++) {
@@ -21,8 +21,29 @@ Queue.prototype.dequeue = function(){
   }
 };
 
-Queue.prototype.size = function(){
+QueueOld.prototype.size = function(){
   return this.length;
 };
 
-var newQueue = new Queue();
+var Queue = function(){
+  this.storage = [];
+};
+
+Queue.prototype.enqueue = function(val){
+  return this.storage.unshift(val);
+};
+
+Queue.prototype.dequeue = function(){
+  return this.storage.pop();
+};
+
+Queue.prototype.size = function(){
+  return this.storage.length;
+};
+
+var queue = new Queue();
+
+console.log(queue.enqueue('cool'));
+queue.enqueue('rad');
+console.log(queue.dequeue());
+console.log(queue.size());

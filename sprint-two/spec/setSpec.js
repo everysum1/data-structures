@@ -5,7 +5,7 @@ describe("set", function() {
   var set;
 
   beforeEach(function() {
-    set = makeSet();
+    set = new SingleSet();
   });
 
   it("should have methods named 'add', 'contains', and 'remove'", function() {

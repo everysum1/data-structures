@@ -1,4 +1,4 @@
-var makeQueue = function(){
+var makeQueueOld = function(){
   var instance = {};
 
   // Use an object with numeric keys to store values
@@ -27,3 +27,30 @@ var makeQueue = function(){
 
   return instance;
 };
+
+var makeQueue = function(){
+  var queue = {};
+  var storage = [];
+  
+  queue.enqueue = function(val){
+    storage.unshift(val);
+    return storage.length;
+  };
+
+  queue.dequeue = function(){
+    return storage.pop();
+  };
+
+  queue.size = function(){
+    return storage.length;
+  };
+
+  return queue;
+};
+
+var queue = makeQueue();
+
+queue.enqueue('cool');
+queue.enqueue('rad');
+console.log(queue.dequeue());
+console.log(queue.size());

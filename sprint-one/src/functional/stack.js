@@ -1,4 +1,4 @@
-var makeStack = function(){
+var makeStackOld = function(){
   var instance = {};
 
   // Use an object with numeric keys to store values
@@ -25,4 +25,24 @@ var makeStack = function(){
   };
 
   return instance;
+};
+
+var makeStack = function(){
+  var stack = {};
+  var storage = [];
+
+  stack.push = function(val){
+    storage.push(val);
+    return storage.length;
+  };
+
+  stack.pop = function(){
+    return storage.pop();
+  };
+
+  stack.size = function(){
+    return storage.length;
+  };
+
+  return stack;
 };

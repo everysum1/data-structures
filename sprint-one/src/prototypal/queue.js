@@ -1,6 +1,6 @@
-var makeQueue = function() {
+var makeQueueOld = function() {
   // Hey! Copy your code from src/functional-shared/queue.js and paste it here
-  var instance = Object.create(queueMethods);
+  var instance = Object.create(queueMethodsOld);
 
   // Use an object with numeric keys to store values
   instance.length = 0;
@@ -10,7 +10,7 @@ var makeQueue = function() {
   return instance;
 };
 
-var queueMethods = {
+var queueMethodsOld = {
 
   enqueue: function(value){
 
@@ -34,3 +34,29 @@ var queueMethods = {
   }
 
 };
+
+var makeQueue = function(){
+  var queue = Object.create(queueMethdos);
+  queue.storage = [];
+  return queue;
+};
+
+var queueMethdos = {
+  'enqueue': function(val){
+    return this.storage.unshift(val);
+  },
+  'dequeue': function(){
+    return this.storage.pop();
+  },
+  'size': function(){
+    return this.storage.length;
+  }
+};
+
+var queue = makeQueue();
+
+queue.enqueue('cool');
+queue.enqueue('rad');
+console.log(queue.dequeue());
+console.log(queue.size());
+

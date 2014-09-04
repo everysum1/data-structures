@@ -5,7 +5,7 @@ describe("linkedList", function() {
   var linkedList;
 
   beforeEach(function() {
-    linkedList = makeLinkedList();
+    linkedList = new LinkedList();
   });
 
   it("should have a head and tail", function() {
@@ -30,9 +30,7 @@ describe("linkedList", function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
     expect(linkedList.head.value).to.equal(4);
-    console.log(linkedList);
     linkedList.removeHead();
-    console.log(linkedList);
     expect(linkedList.head.value).to.equal(5);
   });
 
@@ -55,9 +53,7 @@ describe("linkedList", function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
     expect(linkedList.tail.value).to.equal(5);
-    console.log(linkedList);
     linkedList.removeTail();
-    console.log(linkedList);
     expect(linkedList.tail.value).to.equal(4);
   });
 

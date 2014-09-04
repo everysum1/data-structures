@@ -36,3 +36,17 @@ setPrototype.remove = function(item){
     this._storage = undefined;
   }
 };
+
+var SingleSet = function(){};
+
+SingleSet.prototype.add = function(item){
+  this[item] = true;
+};
+
+SingleSet.prototype.contains = function(item){
+  return !!this[item];
+};
+
+SingleSet.prototype.remove = function(item){
+  this[item] = undefined;
+};

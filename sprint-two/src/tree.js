@@ -55,3 +55,50 @@ treeMethods.traverse = function(callback) {
     }
   }
 };
+
+var Tree = function(value){
+  this.value = value;
+  this.children = [];
+  this.parent = undefined;
+};
+
+Tree.prototype.addChild = function(value){
+  var node = new Tree(value);
+  node.parent = this;
+  this.children.push(node);
+};
+
+Tree.prototype.removeFromParent = function(){
+  if(this.parent !== null){
+    var parent = this.parent;
+    for(var i = 0; i < parent.children.length; i++){
+      var child = parent.children[i];
+      if(this.value === child.value){
+        parent.children.splice(i,1);
+        break;
+      }
+    }
+    this.parent = undefined;
+  }
+};
+
+Tree.prototype.contains = function(target){
+  if(this.value === target){
+    return true;
+  }
+  var child;
+  var state = false;
+  for(var i = 0; i < this.children.length; i++){
+    child = this.children[i];
+    state = state || child.contains(target);
+  }
+  return state;
+};
+
+Tree.prototype.traverse = function(callback){
+  callback(this);
+  for(var i = 0; i < this.children.length; i++){
+    var child = this.children[i];
+    child.traverse(callback);
+  }
+};

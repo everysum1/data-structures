@@ -1,10 +1,10 @@
-var assert = chai.assert; 
+var assert = chai.assert;
 
 describe("binarySearchTree", function() {
   var binarySearchTree;
 
   beforeEach(function() {
-    binarySearchTree = makeBinarySearchTree(5);
+    binarySearchTree = new BinarySearchTree(5);
   });
 
   it("should have methods named 'insert', 'contains', and 'depthFirstLog", function() {
@@ -18,7 +18,7 @@ describe("binarySearchTree", function() {
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
     binarySearchTree.insert(6);
-    expect(binarySearchTree.left.right.value).to.equal(3);
+    expect(binarySearchTree.left.left.value).to.equal(2);
     expect(binarySearchTree.right.left.value).to.equal(6);
   });
 
@@ -32,14 +32,14 @@ describe("binarySearchTree", function() {
   
   it("should execute a callback on every value in a tree using 'depthFirstLog'", function(){
     var array = [];
-    var func = function(value){ array.push(value); }
+    var func = function(value){ array.push(value); };
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.depthFirstLog(func);
     assert.notStrictEqual(array, [5,2,3]);
   });
 
-    it("should apply a callback to all nodes on a tree using 'breadthFirstLog", function(){
+  it("should apply a callback to all nodes on a tree using 'breadthFirstLog", function(){
     binarySearchTree.insert(5);
     binarySearchTree.insert(11);
     binarySearchTree.insert(7);
@@ -50,5 +50,14 @@ describe("binarySearchTree", function() {
     });
     assert.isTrue(binarySearchTree.contains(12));
     assert.isTrue(binarySearchTree.contains(9));
+  });
+
+  it("should remake unbalanced trees", function(){
+    binarySearchTree.insert(3);
+    assert.isTrue(binarySearchTree.left.value === 3);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(8);
+    assert.isTrue(binarySearchTree.right.value === 8);
   });
 });
